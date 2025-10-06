@@ -19,9 +19,16 @@ public class Monsters : MonoBehaviour
         Floral,
         Spark
     }
+    public enum GrowthRate
+    {
+        Fast,
+        Medeaum,
+        Slow
+    }
     public bool Wild = false;
     public Aura1 type1;
     public Aura2 type2;
+    public GrowthRate growth;
     public int MonsterID;
     [Range(1, 255)] public int HP;
     public int HPMax;
@@ -34,14 +41,16 @@ public class Monsters : MonoBehaviour
     public int SpeedCurrent;
     [SerializeField] private GameObject FrontSprite;
     [SerializeField] private GameObject BackSprite;
-    [SerializeField] private List<GameObject> Moves;
+    public List<GameObject> Moves;
     [Range(1, 100)] private int LV;
-    public int exp;
+    private int expNeeded=100;
+    public int expHas;
     Canvas canvas;
     private void Start()
     {
         canvas = FindObjectOfType<Canvas>();
         Show();
+        LevelCalc();
     }
     public void Show()
     {
@@ -61,11 +70,42 @@ public class Monsters : MonoBehaviour
         }
         Debug.Log("Monster: " + MonsterID + " Base stat Total:" + (HP + Offence + Defence + Speed));
     }
-    public void LevelCalc()
+    private void LevelCalc()
     {
-        HPMax = (int)Mathf.Round(HP * 0.314f * LV);
-        OffenceCurrent = (int)Mathf.Round(Offence * 0.314f * LV);
-        DefenceCurrent = (int)Mathf.Round(Defence * 0.314f * LV);
-        Speed = (int)Mathf.Round(Speed * 0.314f * LV);
+        HPMax = (int)Mathf.Round(HP * 0.0314f * LV);
+        OffenceCurrent = (int)Mathf.Round(Offence * 0.0314f * LV);
+        DefenceCurrent = (int)Mathf.Round(Defence * 0.0314f * LV);
+        SpeedCurrent = (int)Mathf.Round(Speed * 0.0314f * LV);
+    }
+    public int GiveExp()
+    {
+        int rate = (int)(HP * 0.01f);
+        int expGive = expHas / LV;
+        return expGive* rate;
+    }
+    public void ReciveExp(int giftedExp)
+    {
+        expHas = (int)(giftedExp / LV);
+
+        if (expHas > expNeeded&&LV!=100)
+        {
+            LV++;
+            LevelUp();
+            LevelCalc();
+        }
+    }
+    private void LevelUp()
+    {
+        switch (growth)
+        {
+            case GrowthRate.Fast: expNeeded = (int)(100 * LV * 3.14f * 1.0f);
+                break;
+            case GrowthRate.Medeaum: expNeeded = (int)(100 * LV * 3.14f * 1.3f);
+                break;
+            case GrowthRate.Slow: expNeeded = (int)(100 * LV * 3.14f * 1.5f);
+                break;
+            default:
+                break;
+        }
     }
 }

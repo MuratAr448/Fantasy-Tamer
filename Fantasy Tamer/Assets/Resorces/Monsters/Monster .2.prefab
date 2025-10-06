@@ -50,14 +50,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49079bdc8e47df24a8ba1c1e6ad295f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wild: 1
+  Wild: 0
   type1: 1
   type2: 0
   MonsterID: 2
   HP: 180
+  HPMax: 0
+  HPCurrent: 0
   Offence: 140
+  OffenceCurrent: 0
   Defence: 165
+  DefenceCurrent: 0
   Speed: 115
+  SpeedCurrent: 0
   FrontSprite: {fileID: 7303747135436445356}
   BackSprite: {fileID: 1665752088535631369}
   Moves: []
