@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    Monsters monsterPlayer;
+    Monsters monsterOpponent;
+    public void StartTurn()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void PlayerAttack() { }
+    public void OpponentAttack() { }
+    public void turnOff() { }
+    public void turnOn() { }
+    public void turnOnOff() { }
+    public void SpeedCompare()
     {
-        
+        if ()
+        {
+
+        }
     }
 }
