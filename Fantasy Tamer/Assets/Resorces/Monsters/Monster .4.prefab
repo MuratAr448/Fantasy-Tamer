@@ -50,9 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49079bdc8e47df24a8ba1c1e6ad295f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wild: 0
-  type1: 3
-  type2: 0
+  opponent: 0
+  type1: 4
+  type2: 5
+  growth: 0
   MonsterID: 4
   HP: 120
   HPMax: 0
@@ -65,8 +66,14 @@ MonoBehaviour:
   SpeedCurrent: 0
   FrontSprite: {fileID: 1911789487552985471}
   BackSprite: {fileID: 9107467849075029625}
-  Moves: []
-  exp: 0
+  Moves:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CurrentMove: {fileID: 0}
+  LV: 1
+  expHas: 0
 --- !u!1001 &1830383358013357646
 PrefabInstance:
   m_ObjectHideFlags: 0

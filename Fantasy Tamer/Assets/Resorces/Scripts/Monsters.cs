@@ -6,6 +6,7 @@ public class Monsters : MonoBehaviour
 {
     public enum Aura1
     {
+        Null,
         Blaze,
         Aqua,
         Floral,
@@ -13,11 +14,12 @@ public class Monsters : MonoBehaviour
     }
     public enum Aura2
     {
-        None,
+        Null,
         Blaze,
         Aqua,
         Floral,
-        Spark
+        Spark,
+        None
     }
     public enum GrowthRate
     {
@@ -25,7 +27,7 @@ public class Monsters : MonoBehaviour
         Medeaum,
         Slow
     }
-    public bool Wild = false;
+    public bool opponent = false;
     public Aura1 type1;
     public Aura2 type2;
     public GrowthRate growth;
@@ -41,32 +43,30 @@ public class Monsters : MonoBehaviour
     public int SpeedCurrent;
     [SerializeField] private GameObject FrontSprite;
     [SerializeField] private GameObject BackSprite;
-    public List<GameObject> Moves;
-    [Range(1, 100)] private int LV;
+    public List<AcionMove> Moves;
+    public AcionMove CurrentMove;
+    [Range(1, 100)] public int LV;
     private int expNeeded=100;
     public int expHas;
-    Canvas canvas;
-    private void Start()
+    public void Begin()
     {
-        canvas = FindObjectOfType<Canvas>();
         Show();
         LevelCalc();
+        HPCurrent = HPMax;
     }
     public void Show()
     {
-        if(Wild)
+        if(opponent)
         {
             FrontSprite.SetActive(true);
             BackSprite.SetActive(false);
-            transform.position = canvas.transform.position + new Vector3(200, 50, 0);
-            gameObject.transform.localScale = new Vector3(1,1,1)*0.6f;
+            gameObject.transform.localScale = new Vector3(1,1,1)*1.75f;
         }
         else
         {
             FrontSprite.SetActive(false);
             BackSprite.SetActive(true);
-            transform.position = canvas.transform.position+ new Vector3(-200,-50,0);
-            gameObject.transform.localScale = new Vector3(1, 1, 1) * 0.7f;
+            gameObject.transform.localScale = new Vector3(1, 1, 1) * 2f;
         }
         Debug.Log("Monster: " + MonsterID + " Base stat Total:" + (HP + Offence + Defence + Speed));
     }
