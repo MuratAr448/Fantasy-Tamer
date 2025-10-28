@@ -18,13 +18,14 @@ public class MoveOption : MonoBehaviour
         turnSystem = FindObjectOfType<TurnSystem>();
         if (turnSystem.monsterPlayer.Moves[movePlace]!=null)
         {
-            GetComponent<Button>().enabled = false;
+            GetComponent<Button>().enabled = true;
             move = turnSystem.monsterPlayer.Moves[movePlace];
             ChoseColor();
             moveName.text = move.name;
-        }else 
+        }else
         {
             GetComponent<Button>().enabled = false;
+            Debug.Log("asodonh");
         }
         
        
