@@ -6,7 +6,7 @@ git config --global core.autocrlf false
 # to native line endings on checkout.
 *.c text
 *.h text
-
+*.txt text eol=lf
 # Declare files that will always have CRLF line endings on checkout.
 *.sln text eol=crlf
 
