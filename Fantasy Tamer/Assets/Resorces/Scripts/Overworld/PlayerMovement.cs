@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-
+    public bool TPing = false;
     Vector2 Idle;
     public float moveSpeed = 5f;
     public Rigidbody2D RB2D;
@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Idle_H", Idle.x);
             animator.SetFloat("Idle_V", Idle.y);
         }
-
+        if (TPing) { movement = new Vector2(0, 0); }
 
 
 
