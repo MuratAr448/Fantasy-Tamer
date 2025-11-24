@@ -12,7 +12,6 @@ public class Utilety : MonoBehaviour
         Dongeon
     }
     [SerializeField] private Image uiFill;
-    public int Full;
     private int Filling;
     PlayerMovement player;
     [SerializeField] private Vector2 spawnPos;
@@ -26,15 +25,17 @@ public class Utilety : MonoBehaviour
     }
     private IEnumerator CoverScreen()
     {
-        while (Filling >= 0)
+        Filling = 0;
+        while (Filling <= 10)
         {
-
-                uiFill.fillAmount = Mathf.InverseLerp(0, Full, Filling);
-                Filling--;
-                yield return new WaitForSeconds(1f);
+            Debug.Log("Happened" + Filling);
+            uiFill.fillAmount += 0.1f;
+            Filling++;
+            yield return new WaitForSeconds(0.1f);
 
             yield return null;
         }
+        Debug.Log("Happened");
         StartCoroutine(LoadingZonePart2());
     }
     private void LoadingZonePart1()
@@ -50,13 +51,13 @@ public class Utilety : MonoBehaviour
         yield return new WaitForFixedUpdate();
 
         Debug.Log("SceneChange");
-        /*
+        
         switch (scene)
         {
             case ChoseScene.Town: SceneManager.LoadScene("Town"); break;
             case ChoseScene.Dongeon: SceneManager.LoadScene("Dungeon"); break;
             default: break;
-        }*/
+        }
     }
 
 }

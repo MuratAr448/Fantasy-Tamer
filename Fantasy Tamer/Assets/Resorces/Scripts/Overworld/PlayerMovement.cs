@@ -2,18 +2,30 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
     public bool TPing = false;
     Vector2 Idle;
     public float moveSpeed = 5f;
     public Rigidbody2D RB2D;
     public Animator animator;
     Vector2 movement;
-    [SerializeField]
-    Camera cam;
+    public Camera cam;
     [SerializeField]
     GameObject campos;
     float Dis = 0;
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this);
+        cam = Camera.main;
+    }
     void Update()
     {
         
