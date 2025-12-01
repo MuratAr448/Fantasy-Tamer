@@ -42,9 +42,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Idle_V", Idle.y);
         }
         if (TPing) { movement = new Vector2(0, 0); }
-
-
-
     }
     void CamFollow()
     {

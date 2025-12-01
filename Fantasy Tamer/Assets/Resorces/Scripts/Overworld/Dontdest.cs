@@ -16,6 +16,10 @@ public class Dontdest : MonoBehaviour
         {
             StartCoroutine(CoverScreen());
         }
+        else
+        {
+            uiFill.transform.gameObject.SetActive(false);
+        }
     }
     private IEnumerator CoverScreen()
     {

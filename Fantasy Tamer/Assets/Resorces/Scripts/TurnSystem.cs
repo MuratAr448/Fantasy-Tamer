@@ -171,6 +171,7 @@ public class TurnSystem : MonoBehaviour
     }
     IEnumerator PlayerFirst()
     {
+        PlayerAttack();
        yield return null;
     }
     IEnumerator OponentFirst()
