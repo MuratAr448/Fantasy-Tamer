@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monsters : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class Monsters : MonoBehaviour
     [Range(1, 100)] public int LV;
     private int expNeeded=100;
     public int expHas;
+    public string Name;
+    public Image MonsterImage;
     public void Begin()
     {
         Show();

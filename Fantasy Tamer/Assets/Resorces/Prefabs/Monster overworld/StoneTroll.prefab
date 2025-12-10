@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneTroll
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 433b50baacb897246ac82aff84818e0d, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 433b50baacb897246ac82aff84818e0d, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -162,8 +166,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
+  m_Mass: 5
+  m_LinearDamping: 1
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

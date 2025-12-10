@@ -1,42 +1,18 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Dontdest : MonoBehaviour
 {
-    private PlayerMovement Player;
-    private int Filling;
-    [SerializeField] private Image uiFill;
-    private void Start()
+    public static GameObject instance;
+    private void Awake()
     {
-        Player = FindObjectOfType<PlayerMovement>();
-        Player.cam = Camera.main;
-        Player.cam.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.cam.transform.position.z);
-        if (Player.TPing)
+        if (instance == null)
         {
-            StartCoroutine(CoverScreen());
+            instance = this.gameObject;
         }
         else
         {
-            uiFill.transform.gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
-    }
-    private IEnumerator CoverScreen()
-    {
-        Filling = 10;
-        while (Filling >= 0)
-        {
-            uiFill.fillAmount -= 0.1f;
-            Filling--;
-            yield return new WaitForSeconds(0.1f);
-
-            yield return null;
-        }
-        Debug.Log("Happened");
-        LoadingZonePart1();
-    }
-    private void LoadingZonePart1()
-    {
-        Player.TPing = false;
+        DontDestroyOnLoad(this);
     }
 }

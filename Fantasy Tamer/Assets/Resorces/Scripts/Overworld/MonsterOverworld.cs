@@ -5,29 +5,44 @@ public class MonsterOverworld : MonoBehaviour
     private PlayerMovement player;
     public GameObject monster;
     Vector3 monsterPosition;
-    private Rigidbody2D RB2D;
+    private float distSee = 3;
     void Start()
     {
         player = FindObjectOfType<PlayerMovement>();
         monsterPosition = transform.position;
-        RB2D = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+        if (!player.TPing && !player.inBattle&& !player.inMenu)
+        {
+            Movement();
+        }
     }
     void Movement()
     {
         float dist = Vector3.Distance(transform.position, player.transform.position);
-        if (!player.TPing && 2 >= dist)
+        if (distSee >= dist)
         {
-            RB2D.MovePosition(player.transform.position + new Vector3(0.1f, 0.1f, 0) * 2.5f * Time.fixedDeltaTime);
+            LookDiretion();
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 2.5f * Time.deltaTime);
+            distSee = 5;
         }
         else
         {
-            RB2D.MovePosition(monsterPosition + new Vector3(0.1f, 0.1f, 0) * 2.5f * Time.fixedDeltaTime);
+            GetComponent<SpriteRenderer>().flipX = false;
+            transform.position = Vector3.MoveTowards(transform.position, monsterPosition, 2.5f * Time.deltaTime);
+            distSee = 3;
+        }
+    }
+    void LookDiretion()
+    {
+        if (player.transform.position.x<transform.position.x)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 }
