@@ -33,7 +33,6 @@ public class ScreenCover : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log("Happened");
         LoadingZonePart1();
     }
     private void LoadingZonePart1()

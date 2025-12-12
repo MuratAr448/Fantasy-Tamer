@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -27,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private int Filling;
     [SerializeField] private Image uiFill;
 
+    [SerializeField] private GameObject scriptTurns;
+    [SerializeField] private TurnSystem turnSystem;
+    
+
     private void Awake()
     {
         if (instance == null)
@@ -40,9 +45,29 @@ public class PlayerMovement : MonoBehaviour
         DontDestroyOnLoad(this);
         cam = Camera.main;
     }
+    private void Start()
+    {
+        for (int i = 0; i < playerMonsters.Count; i++)
+        {
+            if (playerMonsters[i] != null)
+            {
+                playerMonsters[i].HPCurrent = playerMonsters[i].HPMax;
+            }
+        }
+    }
     void Update()
     {
-        
+        Movement();
+        if (!TPing && !inBattle)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                VeiwMonsters();
+            }
+        }
+    }
+    void Movement()
+    {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -54,13 +79,6 @@ public class PlayerMovement : MonoBehaviour
             Idle = movement;
             animator.SetFloat("Idle_H", Idle.x);
             animator.SetFloat("Idle_V", Idle.y);
-        }
-        if (!TPing && !inBattle)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                VeiwMonsters();
-            }
         }
     }
     void CamFollow()
@@ -96,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
         {
             inBattle = true;
             StartCoroutine(CoverScreen());
+            turnSystem.monsterPlayer = playerMonsters[0];
+            turnSystem.monsterOpponent = collision.gameObject.GetComponent<MonsterOverworld>().monster.GetComponent<Monsters>();
         }
     }
     public void VeiwMonsters()
@@ -133,6 +153,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator RevealingScreen()
     {
+        BattleScene.SetActive(inBattle);
+        GameObject temp = Instantiate(scriptTurns);
+        temp.GetComponent<ScriptTurns>().turnSystem = turnSystem;
+        temp.GetComponent<ScriptTurns>().moves = turnSystem.moveOptions;
+        Destroy(temp ,1);
+        
+        
         Filling = 10;
         while (Filling >= 0)
         {
@@ -145,7 +172,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator CoverScreen()
     {
-        
         Filling = 0;
         while (Filling <= 10)
         {
@@ -155,6 +181,11 @@ public class PlayerMovement : MonoBehaviour
 
             yield return null;
         }
-
+        StartCoroutine(RevealingScreen());
+    }
+    public void BattleEnd()
+    {
+        inBattle = false;
+        StartCoroutine(CoverScreen());
     }
 }

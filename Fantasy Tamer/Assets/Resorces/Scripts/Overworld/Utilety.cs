@@ -28,14 +28,12 @@ public class Utilety : MonoBehaviour
         Filling = 0;
         while (Filling <= 10)
         {
-            Debug.Log("Happened" + Filling);
             uiFill.fillAmount += 0.1f;
             Filling++;
             yield return new WaitForSeconds(0.1f);
 
             yield return null;
         }
-        Debug.Log("Happened");
         StartCoroutine(LoadingZonePart2());
     }
     private void LoadingZonePart1()

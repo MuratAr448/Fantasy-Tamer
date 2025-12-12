@@ -17,6 +17,18 @@ PrefabInstance:
       value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 0de3a5355eae69140a2b81e1068e84d1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 0de3a5355eae69140a2b81e1068e84d1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 0de3a5355eae69140a2b81e1068e84d1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 0de3a5355eae69140a2b81e1068e84d1, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}

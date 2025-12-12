@@ -28771,6 +28771,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1663114258670731053, guid: a401f8ded1d65554f9a8645d10b970e4, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 8192692221333743099, guid: 1231f6b75c0ca2f41ac1c4c08b1eb810, type: 3}
     - target: {fileID: 2436549074421714030, guid: a401f8ded1d65554f9a8645d10b970e4, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -28888,6 +28892,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5772638796651249685, guid: c3f74b9a89355c94789a74ed7ddd6019, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 2675048179250703775, guid: 52883656006b8144b84bc970d16d5d2b, type: 3}
     - target: {fileID: 7210543279185485830, guid: c3f74b9a89355c94789a74ed7ddd6019, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -28949,6 +28957,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3987879632567001280, guid: aa28890bd046b4f41a2381cbbddcc1e5, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 3732484173208726383, guid: 8c732ccc239378845957687b0206056b, type: 3}
     - target: {fileID: 5787595146541641719, guid: aa28890bd046b4f41a2381cbbddcc1e5, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -28978,6 +28990,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5600114041297991208, guid: 359731d9f0c1854439b0f52b5025b74f, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 4833543263154852309, guid: 6b7d7a8398a849c4494019d31ee32247, type: 3}
     - target: {fileID: 6255166962724563895, guid: 359731d9f0c1854439b0f52b5025b74f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.43

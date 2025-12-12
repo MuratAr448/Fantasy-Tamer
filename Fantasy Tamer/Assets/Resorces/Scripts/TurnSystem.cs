@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +20,7 @@ public class TurnSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ShowOpponentLV;
     [SerializeField] private Slider ShowOpponentHP;
     public List<MoveOption> moveOptions;
-
+    [SerializeField] private GameObject scriptTurns;
     public void SelectOption(MoveOption option)
     {
         for (int i = 0; i < moveOptions.Count; i++)
@@ -33,11 +35,11 @@ public class TurnSystem : MonoBehaviour
     }
     public void StartTurn()
     {
-        monsterPlayer = playerPlace.GetComponentInChildren<Monsters>();
+        Instantiate(monsterPlayer.gameObject,playerPlace.transform);
         ShowPlayerLV.text = "LV: " + monsterPlayer.LV;
         ShowPlayerHP.maxValue = monsterPlayer.HPMax;
         ShowPlayerHP.value = monsterPlayer.HPCurrent;
-        monsterOpponent = opponentPlace.GetComponentInChildren<Monsters>();
+        Instantiate(monsterOpponent.gameObject, opponentPlace.transform);
         ShowOpponentLV.text = "LV: " + monsterOpponent.LV;
         ShowOpponentHP.maxValue = monsterOpponent.HPMax;
         ShowOpponentHP.value = monsterOpponent.HPCurrent;
@@ -110,6 +112,21 @@ public class TurnSystem : MonoBehaviour
             default: return effectiveness;
         }
     }
+    private float Crit(bool High)
+    {
+        float crit = 1;
+        int limitCrit = 16;
+        if (High)
+        {
+            limitCrit = (int)(limitCrit * 0.5f);
+        }
+        int rand = UnityEngine.Random.Range(0, limitCrit);
+        if (rand >= limitCrit)
+        {
+            crit = crit * 1.5f;
+        }
+        return crit;
+    }
     public void PlayerAttack() 
     {
 
@@ -119,29 +136,54 @@ public class TurnSystem : MonoBehaviour
         monsterOpponent.HPCurrent -= (int)damage;
 
         ShowOpponentHP.value = monsterOpponent.HPCurrent;
+
     }
-    private float Crit(bool High)
+    public void EndPlayerTurn(bool Attack)
     {
-        float crit = 1;
-        int limitCrit = 16;
-        if(High)
+        if(Attack)
         {
-            limitCrit = (int)(limitCrit*0.5f);
+            SpeedCompare();
         }
-        int rand = UnityEngine.Random.Range(0, limitCrit);
-        if (rand >= limitCrit)
+        else
         {
-            crit = crit * 1.5f;
+            OpponentAttack();
         }
-        return crit;
+        
+        GameObject temp = Instantiate(scriptTurns);
+        temp.GetComponent<ScriptTurns>().turnSystem = this;
+        temp.GetComponent<ScriptTurns>().moves = moveOptions;
+        Destroy(temp, 1);
     }
-    public void OpponentAttack() { }
+
+    public void OpponentAttack()
+    {
+        AcionMove AcionOption = null;
+        int moveAmount = 0;
+        for (int i = 0; i < monsterOpponent.Moves.Count; i++)
+        {
+            if (monsterOpponent.Moves[i] != null)
+            {
+                moveAmount++;
+            }
+            AcionOption = monsterOpponent.Moves[UnityEngine.Random.Range(0, moveAmount)];
+        }
+        monsterOpponent.CurrentMove = AcionOption;
+
+
+        float times = (float)monsterOpponent.OffenceCurrent / (float)monsterPlayer.DefenceCurrent;
+        times = (float)Math.Round(times, 3);
+        float damage = (2 * monsterOpponent.LV) * SuperEffective(monsterOpponent.CurrentMove, monsterPlayer) * times * Crit(monsterOpponent.CurrentMove.critHigh) * STABCheck();
+        monsterPlayer.HPCurrent -= (int)damage;
+
+        ShowPlayerHP.value = monsterPlayer.HPCurrent;
+    }
     public void SpeedCompare()
     {
         if (monsterPlayer.CurrentMove.Priority>monsterOpponent.CurrentMove.Priority)
         {
             StartCoroutine(PlayerFirst());
-        }else if(monsterPlayer.CurrentMove.Priority < monsterOpponent.CurrentMove.Priority)
+        }
+        else if(monsterPlayer.CurrentMove.Priority < monsterOpponent.CurrentMove.Priority)
         {
             StartCoroutine(OponentFirst());
         }
@@ -172,10 +214,19 @@ public class TurnSystem : MonoBehaviour
     IEnumerator PlayerFirst()
     {
         PlayerAttack();
-       yield return null;
+       yield return new WaitForSeconds(1f);
+        if (monsterOpponent.HPCurrent! <= 0)
+        {
+            OpponentAttack();
+        }
+
     }
     IEnumerator OponentFirst()
     {
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        if (monsterPlayer.HPCurrent!<=0)
+        {
+            PlayerAttack();
+        }
     }
 }

@@ -12,12 +12,14 @@ public class ScriptTurns : MonoBehaviour
     public List<MoveOption> moves;
     void Start()
     {
-        monsterPlayer = playerPlace.GetComponentInChildren<Monsters>();
-        monsterOpponent = opponentPlace.GetComponentInChildren<Monsters>();
         StartCoroutine(Loading());
     }
     IEnumerator Loading()
     {
+        yield return new WaitForSeconds(0.01f);
+        monsterPlayer = turnSystem.monsterPlayer;
+        monsterOpponent = turnSystem.monsterOpponent;
+        yield return new WaitForSeconds(0.01f);
         monsterPlayer.Begin();
         monsterOpponent.Begin();
         yield return new WaitForSeconds(0.01f);

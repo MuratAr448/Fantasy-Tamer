@@ -8,6 +8,9 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private MoveOption moveOption4;
     [SerializeField] private GameObject Options;
     [SerializeField] private GameObject BattleOptions;
+    [SerializeField] private GameObject ChooseMonsterOptions;
+    [SerializeField] private PlayerMovement player;
+    [SerializeField] private TurnSystem turnSystem;
     public void PressedFight()
     {
         Options.SetActive(false);
@@ -15,8 +18,20 @@ public class BattleUI : MonoBehaviour
     }
     public void PressedTamed()
     {
-
+        Options.SetActive(false);
+        ChooseMonsterOptions.SetActive(true);
     }
+    public void PickTamed(int Choose)
+    {
+        if (Choose != 0)
+        {
+            Monsters temp = player.playerMonsters[Choose];
+            player.playerMonsters[Choose] = player.playerMonsters[0];
+            player.playerMonsters[0] = temp;
+            turnSystem.EndPlayerTurn(false);
+        }
+    }
+
     public void PressedCapture()
     {
 
@@ -24,6 +39,12 @@ public class BattleUI : MonoBehaviour
     public void PressedRun()
     {
 
+    }
+    public void BackToOptions()
+    {
+        Options.SetActive(true);
+        BattleOptions.SetActive(false);
+        ChooseMonsterOptions.SetActive(false);
     }
 
     public void PressedMove1()
@@ -42,10 +63,4 @@ public class BattleUI : MonoBehaviour
     {
         moveOption4.Selected();
     }
-    public void Back()
-    {
-        Options.SetActive(true);
-        BattleOptions.SetActive(false);
-    }
-
 }

@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 3732484173208726383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 463991779026281784}
@@ -56,14 +56,14 @@ MonoBehaviour:
   growth: 0
   MonsterID: 1
   HP: 150
-  HPMax: 0
-  HPCurrent: 0
+  HPMax: 71
+  HPCurrent: 71
   Offence: 185
-  OffenceCurrent: 0
+  OffenceCurrent: 87
   Defence: 115
-  DefenceCurrent: 0
+  DefenceCurrent: 54
   Speed: 150
-  SpeedCurrent: 0
+  SpeedCurrent: 71
   FrontSprite: {fileID: 128976611639098476}
   BackSprite: {fileID: 2797864021557081060}
   Moves:
@@ -72,8 +72,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   CurrentMove: {fileID: 0}
-  LV: 1
+  LV: 15
   expHas: 0
+  Name: Barnabis
+  MonsterImage: {fileID: 5311816330863427909, guid: c07324fa9f056bf4da1ac6b56730329e, type: 3}
 --- !u!1001 &2384332015881327106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 559251011889521126, guid: a6c237cf325bcdb45bc4d6e68a1c1603, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4165162098350458072, guid: a6c237cf325bcdb45bc4d6e68a1c1603, type: 3}
       propertyPath: m_Pivot.x
@@ -276,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 3865254264232317567, guid: 7c1a5b54e3105e747b6b7d0fbca63740, type: 3}
       propertyPath: m_Name
       value: Monster Sprite front .1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865254264232317567, guid: 7c1a5b54e3105e747b6b7d0fbca63740, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

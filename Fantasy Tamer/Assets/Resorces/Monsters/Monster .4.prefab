@@ -74,6 +74,8 @@ MonoBehaviour:
   CurrentMove: {fileID: 0}
   LV: 1
   expHas: 0
+  Name: 
+  MonsterImage: {fileID: 8473056289087619718, guid: adad77a31d3b23949affd1896f1cf17b, type: 3}
 --- !u!1001 &1830383358013357646
 PrefabInstance:
   m_ObjectHideFlags: 0

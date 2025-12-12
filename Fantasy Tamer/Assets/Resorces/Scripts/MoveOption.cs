@@ -75,7 +75,7 @@ public class MoveOption : MonoBehaviour
     public void Using()
     {
         turnSystem.monsterPlayer.CurrentMove = move;
-        turnSystem.SpeedCompare();
+        turnSystem.EndPlayerTurn(true);
     }
     private void Update()
     {
