@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -113,9 +114,14 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Monster")
         {
             inBattle = true;
+            GameObject temp = Instantiate(scriptTurns);
+            temp.GetComponent<ScriptTurns>().turnSystem = turnSystem;
+            temp.GetComponent<ScriptTurns>().moves = turnSystem.moveOptions;
+            Destroy(temp, 1);
             StartCoroutine(CoverScreen());
             turnSystem.monsterPlayer = playerMonsters[0];
             turnSystem.monsterOpponent = collision.gameObject.GetComponent<MonsterOverworld>().monster.GetComponent<Monsters>();
+            turnSystem.monsterOpponent.opponent = true;
         }
     }
     public void VeiwMonsters()
@@ -151,15 +157,21 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    public void EndBattle()
+    {
+        inBattle = false;
+        CoverScreen();
+    }
     private IEnumerator RevealingScreen()
     {
         BattleScene.SetActive(inBattle);
-        GameObject temp = Instantiate(scriptTurns);
-        temp.GetComponent<ScriptTurns>().turnSystem = turnSystem;
-        temp.GetComponent<ScriptTurns>().moves = turnSystem.moveOptions;
-        Destroy(temp ,1);
-        
-        
+        if (inBattle)
+        {
+            GameObject temp = Instantiate(scriptTurns);
+            temp.GetComponent<ScriptTurns>().turnSystem = turnSystem;
+            temp.GetComponent<ScriptTurns>().moves = turnSystem.moveOptions;
+            Destroy(temp, 1);
+        }
         Filling = 10;
         while (Filling >= 0)
         {

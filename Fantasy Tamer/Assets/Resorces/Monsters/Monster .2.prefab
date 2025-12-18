@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 2675048179250703775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4987959988438781385}
@@ -50,25 +50,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49079bdc8e47df24a8ba1c1e6ad295f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponent: 0
+  opponent: 1
   type1: 2
   type2: 5
   growth: 0
   MonsterID: 2
   HP: 180
-  HPMax: 0
-  HPCurrent: 0
+  HPMax: 6
+  HPCurrent: 6
   Offence: 140
-  OffenceCurrent: 0
+  OffenceCurrent: 4
   Defence: 165
-  DefenceCurrent: 0
+  DefenceCurrent: 5
   Speed: 115
-  SpeedCurrent: 0
+  SpeedCurrent: 4
   FrontSprite: {fileID: 7303747135436445356}
   BackSprite: {fileID: 1665752088535631369}
   Moves:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 03d11cbf171b28c43987cbdc2cd51e8b, type: 2}
+  - {fileID: 11400000, guid: c13420f874442344ba4a368fa7feb879, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   CurrentMove: {fileID: 0}
@@ -87,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 888698789697525140, guid: 4db15080be9d24c46b813420de5eb605, type: 3}
       propertyPath: m_Name
       value: Monster Sprite front .2
+      objectReference: {fileID: 0}
+    - target: {fileID: 888698789697525140, guid: 4db15080be9d24c46b813420de5eb605, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3184500869744529137, guid: 4db15080be9d24c46b813420de5eb605, type: 3}
       propertyPath: m_Pivot.x

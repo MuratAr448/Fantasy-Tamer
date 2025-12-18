@@ -133,29 +133,20 @@ public class TurnSystem : MonoBehaviour
         float times = (float)monsterPlayer.OffenceCurrent / (float)monsterOpponent.DefenceCurrent;
         times = (float)Math.Round(times,3);
         float damage = (2 * monsterPlayer.LV) * SuperEffective(monsterPlayer.CurrentMove, monsterOpponent) * times * Crit(monsterPlayer.CurrentMove.critHigh) * STABCheck();
+        Debug.Log(damage);
         monsterOpponent.HPCurrent -= (int)damage;
-
+        if((int)damage >= monsterOpponent.HPCurrent)
+        {
+            monsterOpponent.HPCurrent=0;
+        }
+        else
+        {
+            monsterOpponent.HPCurrent -= (int)damage;
+        }
         ShowOpponentHP.value = monsterOpponent.HPCurrent;
 
     }
     public void EndPlayerTurn(bool Attack)
-    {
-        if(Attack)
-        {
-            SpeedCompare();
-        }
-        else
-        {
-            OpponentAttack();
-        }
-        
-        GameObject temp = Instantiate(scriptTurns);
-        temp.GetComponent<ScriptTurns>().turnSystem = this;
-        temp.GetComponent<ScriptTurns>().moves = moveOptions;
-        Destroy(temp, 1);
-    }
-
-    public void OpponentAttack()
     {
         AcionMove AcionOption = null;
         int moveAmount = 0;
@@ -168,13 +159,31 @@ public class TurnSystem : MonoBehaviour
             AcionOption = monsterOpponent.Moves[UnityEngine.Random.Range(0, moveAmount)];
         }
         monsterOpponent.CurrentMove = AcionOption;
+        if (Attack)
+        {
+            SpeedCompare();
+        }
+        else
+        {
+            OpponentAttack();
+        }
+    }
 
-
+    public void OpponentAttack()
+    {
         float times = (float)monsterOpponent.OffenceCurrent / (float)monsterPlayer.DefenceCurrent;
         times = (float)Math.Round(times, 3);
         float damage = (2 * monsterOpponent.LV) * SuperEffective(monsterOpponent.CurrentMove, monsterPlayer) * times * Crit(monsterOpponent.CurrentMove.critHigh) * STABCheck();
-        monsterPlayer.HPCurrent -= (int)damage;
-
+        Debug.Log(damage+ "opponet");
+        
+        if ((int)damage >= monsterPlayer.HPCurrent)
+        {
+            monsterPlayer.HPCurrent = 0;
+        }
+        else
+        {
+            monsterPlayer.HPCurrent -= (int)damage;
+        }
         ShowPlayerHP.value = monsterPlayer.HPCurrent;
     }
     public void SpeedCompare()
@@ -218,6 +227,12 @@ public class TurnSystem : MonoBehaviour
         if (monsterOpponent.HPCurrent! <= 0)
         {
             OpponentAttack();
+            Debug.Log("opAttack");
+        }
+        else
+        {
+            Debug.Log("Battle end");
+            FindObjectOfType<PlayerMovement>().BattleEnd();
         }
 
     }
@@ -227,6 +242,11 @@ public class TurnSystem : MonoBehaviour
         if (monsterPlayer.HPCurrent!<=0)
         {
             PlayerAttack();
+        }
+        else
+        {
+            Debug.Log("Battle end");
+            FindObjectOfType<PlayerMovement>().BattleEnd();
         }
     }
 }

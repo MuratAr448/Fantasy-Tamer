@@ -67,8 +67,8 @@ MonoBehaviour:
   FrontSprite: {fileID: 128976611639098476}
   BackSprite: {fileID: 2797864021557081060}
   Moves:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 291781baf2fd7314881ff3c5ce4493bc, type: 2}
+  - {fileID: 11400000, guid: c13420f874442344ba4a368fa7feb879, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   CurrentMove: {fileID: 0}
